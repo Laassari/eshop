@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+  </head>
+  <body>
+    <form action="/auth/signup" method="post">
+      <input type="email" name="email" placeholder="email" />
+      <input type="password" name="password" placeholder="********" />
+
+      <input type="submit" value="Submit" />
+    </form>
+
+    <div style="color: red">
+      <% if(locals.errors?.length) {%>
+      <p>Errors occured:</p>
+      <ul>
+        <% locals.errors.forEach(function(error){ %>
+        <li><%=error.msg%></li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </div>
+  </body>
+</html>
