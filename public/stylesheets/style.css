@@ -1,0 +1,15 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #404040;
+}
+
+.navbar {
+  display: flex;
+  list-style: none;
+  gap: 10px;
+  margin-left: auto;
+  width: fit-content;
+}
+.navbar a {
+  color: #404040;
+}

@@ -5,12 +5,11 @@
   </head>
 
   <body>
-    <nav>
-      <ul style="display: flex; list-style: none; gap: 10px; margin-left: auto; width: fit-content;">
-        <li><a href="/auth/signup?redirect_to=/about">Sign Up</a></li>
-        <li><a href="/auth/login">Login</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-    </nav>
+    <%- include('components/navbar.html') %>
+
+    <main>
+      <h1>Hi <%= locals.full_name || 'Guest' %></h1>
+      Some content to go here...
+    </main>
   </body>
 </html>

@@ -10,4 +10,12 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", signupValidation, signup);
 
+router.get("/login", (req, res) => {
+  res.render("auth/login");
+});
+
+router.post("/login", (req, res) => {
+  res.render("auth/login");
+});
+
 export default router;
