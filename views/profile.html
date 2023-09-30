@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <style>
+      td {
+        border: 0.5px solid #333;
+      }
+
+      tr td{
+        padding: 4px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('components/navbar.html') %>
+
+    <main>
+      <h1>Hi <%= locals.full_name || 'Guest' %></h1>
+      <table>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td><%= locals.user.id %></td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td><%= locals.user.full_name %></td>
+          </tr>
+          <tr>
+            <td>email</td>
+            <td><%= locals.user.email %></td>
+          </tr>
+          <tr>
+            <td>role</td>
+            <td><%= locals.user.role %></td>
+          </tr>
+          <tr>
+            <td>hashed password</td>
+            <td><%= locals.user.hashed_password %></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

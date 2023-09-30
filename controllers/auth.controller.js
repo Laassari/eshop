@@ -43,3 +43,13 @@ export async function signup(req, res, next) {
     });
   });
 }
+
+export async function signOut(req, res, next){
+  req.session.user = null
+
+  req.session.save(function (err) {
+    if (err) next(err);
+
+    res.sendStatus(200);
+  });
+}

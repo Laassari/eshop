@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { signupValidation, signup } from "../controllers/auth.controller.js";
+import { signupValidation, signup, signOut } from "../controllers/auth.controller.js";
 
 const router = Router();
 
@@ -9,6 +9,7 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup", signupValidation, signup);
+router.post("/signOut", signOut);
 
 router.get("/login", (req, res) => {
   res.render("auth/login");
