@@ -4,7 +4,11 @@ import { getUserByEmail } from "../models/user.js";
 import { hashPassword, verifyPassword } from "../lib/password.js";
 
 export const signupValidation = [
-  body("email", "Invalid email").isEmail().isLength({ max: 100 }).exists(),
+  body("email", "Invalid email")
+    .isEmail()
+    .isLength({ max: 100 })
+    .custom(emailIsUnique).withMessage('Email already exists')
+    .exists(),
   body("password", "Invalid password").isLength({ max: 100, min: 6 }).exists(),
   body("full_name", "Invalid name").isLength({ max: 25, min: 4 }).exists(),
 ];
@@ -75,4 +79,12 @@ export async function signOut(req, res, next) {
 
     res.sendStatus(200);
   });
+}
+
+async function emailIsUnique(email) {
+  const user = await getUserByEmail(email);
+
+  if (user) throw new Error("Email already exists");
+
+  return true;
 }
