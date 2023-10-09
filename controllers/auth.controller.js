@@ -7,7 +7,8 @@ export const signupValidation = [
   body("email", "Invalid email")
     .isEmail()
     .isLength({ max: 100 })
-    .custom(emailIsUnique).withMessage('Email already exists')
+    .custom(emailIsUnique)
+    .withMessage("Email already exists")
     .exists(),
   body("password", "Invalid password").isLength({ max: 100, min: 6 }).exists(),
   body("full_name", "Invalid name").isLength({ max: 25, min: 4 }).exists(),
@@ -58,7 +59,9 @@ export async function login(req, res, next) {
   const passwordMatch = await verifyPassword(password, user.hashed_password);
 
   if (!passwordMatch) {
-    return res.status(401).send("Passwrod incorrect");
+    return res.status(422).render("auth/login", {
+      errors: [{ msg: "Passwrod incorrect" }],
+    });
   }
 
   req.session.regenerate(function (err) {
