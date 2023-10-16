@@ -2,6 +2,7 @@ import { body, validationResult, matchedData } from "express-validator";
 import { query } from "../db/index.js";
 import { getUserByEmail } from "../models/user.js";
 import { hashPassword, verifyPassword } from "../lib/password.js";
+import SQL from "sql-template-strings";
 
 export const signupValidation = [
   body("email", "Invalid email")
@@ -26,11 +27,12 @@ export async function signup(req, res, next) {
 
   try {
     const hashedPassword = await hashPassword(password);
-    // TODO: what happens when mail already exist?
-    const { rows } = await query(
-      "INSERT INTO users (full_name, email, hashed_password) VALUES ($1, $2, $3) RETURNING *",
-      [full_name, email, hashedPassword]
-    );
+    const { rows } = await query(SQL`
+        INSERT
+        INTO    users 
+                (full_name, email, hashed_password) 
+        VALUES  (${full_name}, ${email}, ${hashedPassword}) RETURNING *
+        `);
 
     user = rows[0];
   } catch (error) {

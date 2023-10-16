@@ -18,6 +18,7 @@
     "jsonwebtoken": "^9.0.1",
     "morgan": "~1.9.1",
     "pg": "^8.11.2",
-    "redis": "^4.6.10"
+    "redis": "^4.6.10",
+    "sql-template-strings": "^2.2.2"
   }
 }
