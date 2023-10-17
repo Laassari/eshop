@@ -3,7 +3,7 @@ import Product from "../models/Product.js";
 export const index = async (req, res, next) => {
   const products = await Product.getProducts();
 
-  res.send(products);
+  res.render("products/index", { products });
 };
 
 export const show = async (req, res, next) => {

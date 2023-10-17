@@ -3,7 +3,7 @@ import { query, SQL } from "../db/index.js";
 
 class ProductSingelton extends BaseModel {
   async getProducts() {
-    const { rows } = await query(SQL`SELECT * FROM products limit 10`);
+    const { rows } = await query(SQL`SELECT * FROM products ORDER BY id`);
 
     return rows.map((row) => this.formatRow(row));
   }
