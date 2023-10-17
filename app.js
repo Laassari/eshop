@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 
 import homeRoutes from "./routes/home.js";
 import authRoutes from "./routes/auth.js";
+import productsRoutes from "./routes/products.js";
 
 dotenv.config();
 
@@ -45,6 +46,7 @@ app.use(
 
 app.use("/", homeRoutes);
 app.use("/auth", authRoutes);
+app.use("/products", productsRoutes);
 
 app.use(errorHandler);
 

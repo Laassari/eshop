@@ -1,5 +1,4 @@
-import { query } from "../db/index.js";
-import SQL from "sql-template-strings";
+import { query, SQL } from "../db/index.js";
 
 export async function getUserByEmail(email) {
   const { rows, rowCount } = await query(
