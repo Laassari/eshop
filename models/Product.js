@@ -8,7 +8,7 @@ class ProductSingelton extends BaseModel {
     return rows.map((row) => this.formatRow(row));
   }
 
-  async getProductById(id) {
+  async findById(id) {
     const { rows, rowCount } = await query(
       SQL`SELECT * FROM products WHERE id = ${id}`
     );

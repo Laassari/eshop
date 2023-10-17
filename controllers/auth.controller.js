@@ -1,7 +1,7 @@
 import { body, validationResult, matchedData } from "express-validator";
 import { query, SQL } from "../db/index.js";
-import { getUserByEmail } from "../models/user.js";
 import { hashPassword, verifyPassword } from "../lib/password.js";
+import User from "../models/User.js";
 
 export const signupValidation = [
   body("email", "Invalid email")
@@ -51,13 +51,13 @@ export async function signup(req, res, next) {
 
 export async function login(req, res, next) {
   const { email, password } = req.body;
-  const user = await getUserByEmail(email);
+  const user = await User.findByEmail(email);
 
   if (!user) {
     return res.status(401).send("User not found");
   }
 
-  const passwordMatch = await verifyPassword(password, user.hashed_password);
+  const passwordMatch = await verifyPassword(password, user.hashedPassword);
 
   if (!passwordMatch) {
     return res.status(422).render("auth/login", {
@@ -86,7 +86,7 @@ export async function signOut(req, res, next) {
 }
 
 async function emailIsUnique(email) {
-  const user = await getUserByEmail(email);
+  const user = await User.findByEmail(email);
 
   if (user) throw new Error("Email already exists");
 

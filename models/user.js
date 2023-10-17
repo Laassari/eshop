@@ -1,11 +1,18 @@
+import BaseModel from "./BaseModel.js";
 import { query, SQL } from "../db/index.js";
 
-export async function getUserByEmail(email) {
-  const { rows, rowCount } = await query(
-    SQL`SELECT * FROM users WHERE email = ${email}`
-  );
+class UserSingelton extends BaseModel {
+  async findByEmail(email) {
+    const { rows, rowCount } = await query(
+      SQL`SELECT * FROM users WHERE email = ${email}`
+    );
 
-  if (rowCount === 0) return null;
+    this.assertOneRecord(rows);
 
-  return rows[0];
+    if (rowCount === 0) return null;
+
+    return this.formatRow(rows[0]);
+  }
 }
+
+export default new UserSingelton();

@@ -10,7 +10,7 @@ function isAuthenticated(req, res, next) {
 
 router.get("/", (req, res) => {
   const user = req.session.user;
-  res.render("index", { full_name: user?.full_name });
+  res.render("index", { full_name: user?.fullName });
 });
 
 router.get("/profile", isAuthenticated, (req, res) => {

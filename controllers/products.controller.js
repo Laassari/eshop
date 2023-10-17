@@ -7,7 +7,7 @@ export const index = async (req, res, next) => {
 };
 
 export const show = async (req, res, next) => {
-  const product = await Product.getProductById(req.params.id);
+  const product = await Product.findById(req.params.id);
 
   if (!product) {
     return res.sendStatus(404);
