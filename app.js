@@ -1,25 +1,10 @@
 import express from "express";
 import path from "path";
-import cookieParser from "cookie-parser";
 import { __express } from "ejs";
-import RedisStore from "connect-redis";
-import { createClient } from "redis";
-import session from "express-session";
-import dotenv from "dotenv";
 
-import homeRoutes from "./routes/home.js";
-import authRoutes from "./routes/auth.js";
-import productsRoutes from "./routes/products.js";
-
-dotenv.config();
-
-let redisClient = createClient();
-redisClient.connect().catch(console.error);
-
-let redisStore = new RedisStore({
-  client: redisClient,
-  prefix: "Auth:",
-});
+import { mountRoutes } from "./routes/index.js";
+import { mountMiddlewares } from "./middleware/index.js";
+import { inniDbtConnection } from "./db/index.js";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -29,30 +14,14 @@ app.set("view engine", "html");
 app.engine(".html", __express);
 app.set("views", path.join(__dirname, "views"));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+mountMiddlewares(app);
+mountRoutes(app);
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    store: redisStore,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false, httpOnly: true },
+inniDbtConnection()
+  .then(() => {
+    app.listen(3000);
   })
-);
-
-app.use("/", homeRoutes);
-app.use("/auth", authRoutes);
-app.use("/products", productsRoutes);
-
-app.use(errorHandler);
-
-function errorHandler(err, req, res, nex) {
-  console.error(err);
-  res.send(err.toString());
-}
-
-app.listen(3000);
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
