@@ -9,9 +9,13 @@ class ProductSingelton extends BaseModel {
   }
 
   async getProductById(id) {
-    const { rows } = await query(SQL`SELECT * FROM products WHERE id = ${id}`);
+    const { rows, rowCount } = await query(
+      SQL`SELECT * FROM products WHERE id = ${id}`
+    );
 
-    assertOneRecord(rows);
+    this.assertOneRecord(rows);
+
+    if (rowCount === 0) return null;
 
     return this.formatRow(rows[0]);
   }
