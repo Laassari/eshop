@@ -13,5 +13,5 @@ export const show = async (req, res, next) => {
     return res.sendStatus(404);
   }
 
-  res.send(product);
+  res.render("products/show", { product });
 };

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>eShop - <%= product.title %></title>
+  </head>
+  <body>
+    <%- include('../components/navbar.html') %>
+
+    <h1><%= product.title %></h1>
+
+    <div
+      style="display: flex; flex-wrap: wrap; flex-direction: column; gap: 10px"
+    >
+      <img
+        src="<%= product.imageUrl %>"
+        style="object-fit: contain; max-height: 50vh; align-self: start;"
+      />
+      <span style="max-width: 200px"><%= product.title %></span>
+      <%= product.price %>
+      <button style="width: 100px;">Buy</button>
+
+      <p><%= product.description %></p>
+    </div>
+  </body>
+</html>
