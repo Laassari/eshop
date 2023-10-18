@@ -5,7 +5,7 @@
   </head>
 
   <body>
-    <%- include('components/navbar.html') %>
+    <%- include('components/navbar.html', { isLoggedIn: !!locals.full_name }) %>
 
     <main>
       <h1>Hi <%= locals.full_name || 'Guest' %></h1>

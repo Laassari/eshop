@@ -7,7 +7,7 @@
     <title>Login</title>
   </head>
   <body>
-    <%- include('../components/navbar.html') %>
+    <%- include('../components/navbar.html', { isLoggedIn: false }) %>
 
     <form action="/auth/login" method="post">
       <input type="email" name="email" placeholder="email" />
