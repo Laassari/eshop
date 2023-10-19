@@ -4,7 +4,7 @@ import { __express } from "ejs";
 
 import { mountRoutes } from "./routes/index.js";
 import { mountMiddlewares } from "./middleware/index.js";
-import { inniDbtConnection } from "./db/index.js";
+import { inniDbtConnection } from "./db/db.js";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 

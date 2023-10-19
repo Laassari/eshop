@@ -1,5 +1,5 @@
 import BaseModel from "./BaseModel.js";
-import { query, SQL } from "../db/index.js";
+import { query, SQL } from "../db/db.js";
 
 class ProductSingelton extends BaseModel {
   async getProducts() {

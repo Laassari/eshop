@@ -1,5 +1,5 @@
 import { body, validationResult, matchedData } from "express-validator";
-import { query, SQL } from "../db/index.js";
+import { query, SQL } from "../db/db.js";
 import { hashPassword, verifyPassword } from "../lib/password.js";
 import User from "../models/User.js";
 
