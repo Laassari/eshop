@@ -13,6 +13,19 @@ class UserSingelton extends BaseModel {
 
     return this.formatRow(rows[0]);
   }
+
+  async create({ fullName, email, hashedPassword }) {
+    const { rows } = await query(SQL`
+        INSERT
+        INTO    users 
+                (full_name, email, hashed_password) 
+        VALUES  (${fullName}, ${email}, ${hashedPassword}) RETURNING *
+        `);
+
+    this.assertOneRecord(rows);
+
+    return this.formatRow(rows[0], ['hashed_password']);
+  }
 }
 
 export default new UserSingelton();

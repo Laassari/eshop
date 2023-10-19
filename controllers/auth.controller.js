@@ -26,14 +26,7 @@ export async function signup(req, res, next) {
 
   try {
     const hashedPassword = await hashPassword(password);
-    const { rows } = await query(SQL`
-        INSERT
-        INTO    users 
-                (full_name, email, hashed_password) 
-        VALUES  (${full_name}, ${email}, ${hashedPassword}) RETURNING *
-        `);
-
-    user = rows[0];
+    user = await User.create({ fullName: full_name, email, hashedPassword });
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
