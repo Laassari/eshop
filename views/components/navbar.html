@@ -1,24 +1,26 @@
-<nav>
+<nav style="display: flex; align-items: center">
+  <a href="/" style="color: #2b2a2a; font-size: 1.2rem; text-decoration: none">eShop</a>
+
   <ul class="navbar">
     <li><a href="/">Home</a></li>
     <li><a href="/products">Products</a></li>
     <li><a href="/profile">Profile</a></li>
     <% if (locals.isLoggedIn) {%>
-      <li>
-        <button
-          href="/signOut"
-          onclick="fetch('/auth/signOut', {
+    <li>
+      <button
+        href="/signOut"
+        onclick="fetch('/auth/signOut', {
         method: 'POST'
       }).then(() => {
         location.reload()
       })"
-        >
-          Log Out
-        </button>
-      </li>
+      >
+        Log Out
+      </button>
+    </li>
     <% } else {%>
-      <li><a href="/auth/login">Login</a></li>
-      <li><a href="/auth/signup">Sign Up</a></li>
+    <li><a href="/auth/login">Login</a></li>
+    <li><a href="/auth/signup">Sign Up</a></li>
     <% }%>
   </ul>
 </nav>
