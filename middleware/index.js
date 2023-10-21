@@ -6,7 +6,9 @@ import { createClient } from "redis";
 import session from "express-session";
 
 export function mountMiddlewares(app) {
-  let redisClient = createClient();
+  let redisClient = createClient({
+    url: process.env.REDIS_CONNECTION_STRING,
+  });
   redisClient.connect().catch(console.error);
 
   let redisStore = new RedisStore({
