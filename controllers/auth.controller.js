@@ -1,7 +1,7 @@
 import { body, validationResult, matchedData } from "express-validator";
 import { query, SQL } from "../db/db.js";
 import { hashPassword, verifyPassword } from "../lib/password.js";
-import User from "../models/User.js";
+import User from "../models/user.js";
 
 export const signupValidation = [
   body("email", "Invalid email")
