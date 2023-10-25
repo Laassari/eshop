@@ -1,12 +1,7 @@
 import { Router } from "express";
+import { isAuthenticated } from "./index.js";
 
 const router = Router();
-
-function isAuthenticated(req, res, next) {
-  if (req.session.user) return next();
-
-  res.status(401).redirect(`/auth/signup?redirect_to=${req.url}`);
-}
 
 router.get("/", (req, res) => {
   const user = req.session.user;

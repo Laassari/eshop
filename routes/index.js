@@ -1,9 +1,17 @@
 import homeRoutes from "./home.route.js";
 import authRoutes from "./auth.route.js";
 import productsRoutes from "./products.route.js";
+import cartRoutes from "./cart.route.js";
+
+export function isAuthenticated(req, res, next) {
+  if (req.session.user) return next();
+
+  res.status(401).redirect(`/auth/signup?redirect_to=${req.url}`);
+}
 
 export function mountRoutes(app) {
   app.use("/", homeRoutes);
   app.use("/auth", authRoutes);
   app.use("/products", productsRoutes);
+  app.use("/cart", cartRoutes);
 }
