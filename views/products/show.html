@@ -19,7 +19,7 @@
         style="object-fit: contain; max-height: 50vh; align-self: start;"
       />
       <span style="max-width: 200px"><%= product.title %></span>
-      <%= product.price %>
+      $<%= product.priceCents / 100 %>    
       <button style="width: 100px;">Buy</button>
 
       <p><%= product.description %></p>
