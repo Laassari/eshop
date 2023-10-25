@@ -13,3 +13,12 @@ export const addToCart = async (req, res) => {
   res.send(cart);
 };
 
+
+export const removeFromCart = (req, res) => {
+  const { cartItemId } = req.params;
+  const CartInstance = new Cart(req.session);
+
+  const cart = CartInstance.removeFromCart(cartItemId);
+
+  res.send(cart);
+};
