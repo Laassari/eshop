@@ -13,6 +13,14 @@ export const addToCart = async (req, res) => {
   res.send(cart);
 };
 
+export const updateCart = (req, res) => {
+  const { cartItemId, quantity } = req.body;
+  const CartInstance = new Cart(req.session);
+
+  const cart = CartInstance.updateCart(cartItemId, quantity);
+
+  res.send(cart);
+};
 
 export const removeFromCart = (req, res) => {
   const { cartItemId } = req.params;
