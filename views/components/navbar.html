@@ -4,6 +4,7 @@
   <ul class="navbar">
     <li><a href="/">Home</a></li>
     <li><a href="/products">Products</a></li>
+    <li><a href="/cart" class="cart">Cart</a></li>
     <li><a href="/profile">Profile</a></li>
     <% if (locals.isLoggedIn) {%>
     <li>
@@ -24,3 +25,14 @@
     <% }%>
   </ul>
 </nav>
+
+<script>
+  const cart = document.querySelector('.cart')
+  const cartItems = globalData.cart?.cartItems || []
+  const cartItemsCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  cart.textContent = cart.textContent + ` (${cartItemsCount})`
+</script>

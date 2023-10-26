@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>eShop - Cart</title>
+    <%- include('../components/head_common.html') %>
+    <script type="module" src="/javascript/pages/cart/cart.js"></script>
+  </head>
+  <body>
+    <%- include('../components/navbar.html', { isLoggedIn: locals.isLoggedIn })%>
+
+    <h1>This is the cart</h1>
+    <% locals.cart.cartItems.forEach(cartItem => {%>
+      <pre>
+        <%= cartItem.product.title %>
+      </pre>
+    <%}) %>
+  </body>
+</html>

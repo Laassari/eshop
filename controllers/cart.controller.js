@@ -1,7 +1,7 @@
 import Cart from "../lib/cart.js";
 
 export const getCart = (req, res) => {
-  res.send(req.session.cart);
+  res.render('cart/cart.html')
 };
 
 export const addToCart = async (req, res) => {

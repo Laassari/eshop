@@ -33,6 +33,12 @@ export function mountMiddlewares(app) {
     })
   );
 
+  // Expose data to locals (all view templates)
+  app.use(function(req, res, next) {
+    res.locals.cart = req.session.cart;
+    next();
+});
+
   app.use(errorHandler);
 
   function errorHandler(err, req, res, nex) {
