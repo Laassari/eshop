@@ -6,7 +6,7 @@
     <%- include('../components/head_common.html') %>
   </head>
   <body>
-    <%- include('../components/navbar.html', { isLoggedIn: false }) %>
+    <%- include('../components/navbar.html') %>
 
     <form action="/auth/signup" method="post">
       <input type="email" name="email" placeholder="email" />

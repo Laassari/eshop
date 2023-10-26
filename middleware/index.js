@@ -38,6 +38,7 @@ export function mountMiddlewares(app) {
   app.use(function (req, res, next) {
     new Cart(req.session);
     res.locals.cart = req.session.cart;
+    res.locals.user = req.session.user;
     next();
   });
 

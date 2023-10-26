@@ -7,7 +7,7 @@
     <script type="module" src="/javascript/pages/cart/cart.js"></script>
   </head>
   <body>
-    <%- include('../components/navbar.html', { isLoggedIn: locals.isLoggedIn })%>
+    <%- include('../components/navbar.html')%>
 
     <h1>This is the cart</h1>
     <% locals.cart.cartItems.forEach(cartItem => {%>

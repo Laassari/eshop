@@ -11,10 +11,11 @@
         padding: 4px;
       }
     </style>
+    <%- include('./components/head_common.html') %>
   </head>
 
   <body>
-    <%- include('components/navbar.html', { isLoggedIn: !!locals.user.fullName }) %>
+    <%- include('components/navbar.html') %>
 
     <main>
       <h1>Hi <%= locals.user.fullName || 'Guest' %></h1>

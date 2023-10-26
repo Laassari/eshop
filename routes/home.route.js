@@ -4,14 +4,11 @@ import { isAuthenticated } from "./index.js";
 const router = Router();
 
 router.get("/", (req, res) => {
-  const user = req.session.user;
-  res.render("index", { full_name: user?.fullName });
+  res.render("index");
 });
 
 router.get("/profile", isAuthenticated, (req, res) => {
-  const user = req.session.user;
-
-  res.render("profile", { user: user });
+  res.render("profile");
 });
 
 export default router;

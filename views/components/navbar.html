@@ -6,7 +6,7 @@
     <li><a href="/products">Products</a></li>
     <li><a href="/cart" class="cart">Cart</a></li>
     <li><a href="/profile">Profile</a></li>
-    <% if (locals.isLoggedIn) {%>
+    <% if (!!locals.user) {%>
     <li>
       <button
         href="/signOut"
@@ -28,7 +28,7 @@
 
 <script>
   const cart = document.querySelector('.cart')
-  const cartItems = globalData.cart?.cartItems || []
+  const cartItems = globalData.cart.cartItems
   const cartItemsCount = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
