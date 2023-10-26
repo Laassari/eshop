@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import RedisStore from "connect-redis";
 import { createClient } from "redis";
 import session from "express-session";
+import Cart from "../lib/cart.js";
 
 export function mountMiddlewares(app) {
   let redisClient = createClient({
@@ -34,10 +35,11 @@ export function mountMiddlewares(app) {
   );
 
   // Expose data to locals (all view templates)
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
+    new Cart(req.session);
     res.locals.cart = req.session.cart;
     next();
-});
+  });
 
   app.use(errorHandler);
 
