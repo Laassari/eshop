@@ -3,6 +3,11 @@ body {
   color: #404040;
 }
 
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .navbar {
   display: flex;
   list-style: none;

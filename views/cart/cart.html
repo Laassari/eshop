@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/pages/cart.css" />
     <title>eShop - Cart</title>
     <%- include('../components/head_common.html') %>
     <script type="module" src="/javascript/pages/cart/cart.js"></script>
@@ -9,11 +10,51 @@
   <body>
     <%- include('../components/navbar.html')%>
 
-    <h1>This is the cart</h1>
-    <% locals.cart.cartItems.forEach(cartItem => {%>
-      <pre>
-        <%= cartItem.product.title %>
-      </pre>
-    <%}) %>
+    <main>
+      <div class="cart">
+        <div class="cart-rows">
+          <h1>Cart</h1>
+          <span>(<%= locals.cart.cartItems.length %> products)</span>
+
+          <% locals.cart.cartItems.forEach(cartItem => {%>
+          <div class="cart-item">
+            <img
+              src="<%= cartItem.product.imageUrl %>"
+              alt="<%= cartItem.product.title %>"
+            />
+            <span class="title"><%= cartItem.product.title %></span>
+
+            <div class="quantity">
+              <button>&plus;</button>
+              <span><%= cartItem.quantity %></span>
+              <button>&minus;</button>
+            </div>
+
+            <span class="price">$<%= cartItem.product.priceCents / 100 %></span>
+
+            <button class="delete-item">&times;</button>
+          </div>
+          <%}) %>
+        </div>
+        <div class="cart-summary">
+          <h2>Order summary</h2>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>$<%= locals.cart.subTotal %></span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>$<%= locals.cart.shipping %></span>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <span>$<%= locals.cart.total %></span>
+          </div>
+
+          <button class="checkout">Continue to checkout</button>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
