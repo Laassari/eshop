@@ -1,7 +1,7 @@
 import Cart from "../lib/cart.js";
 
 export const getCart = (req, res) => {
-  res.render('cart/cart.html')
+  res.render("cart/cart.html");
 };
 
 export const addToCart = async (req, res) => {
@@ -13,7 +13,7 @@ export const addToCart = async (req, res) => {
     res.send(cart);
   } catch (error) {
     console.error(error);
-    res.status(500).send(error);
+    res.status(400).send({ message: error.toString() });
   }
 };
 
@@ -26,7 +26,7 @@ export const updateCart = (req, res) => {
     res.send(cart);
   } catch (error) {
     console.error(error);
-    res.status(500).send(error);
+    res.status(400).send({ message: error.toString() });
   }
 };
 
@@ -39,6 +39,6 @@ export const removeFromCart = (req, res) => {
     res.send(cart);
   } catch (error) {
     console.error(error);
-    res.status(500).send(error);
+    res.status(500).send({ message: error.toString() });
   }
 };

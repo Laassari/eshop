@@ -32,7 +32,7 @@
 
             <span class="price">$<%= cartItem.product.priceCents / 100 %></span>
 
-            <button class="delete-item">&times;</button>
+            <button class="delete-item" data-cart-item-id="<%= cartItem.id %>">&times;</button>
           </div>
           <%}) %>
         </div>
