@@ -2,8 +2,11 @@ import BaseModel from "./BaseModel.js";
 import { query, SQL } from "../db/db.js";
 
 class ProductSingelton extends BaseModel {
-  async getProducts() {
-    const { rows } = await query(SQL`SELECT * FROM products ORDER BY id`);
+  async getProducts({ limit } = {}) {
+    const q = SQL`SELECT * FROM products ORDER BY id`;
+
+    if (limit) q.append(SQL` LIMIT ${limit}`);
+    const { rows } = await query(q);
 
     return rows.map((row) => this.formatRow(row));
   }

@@ -3,14 +3,46 @@
     <title>eShop - Home</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <%- include('./components/head_common.html') %>
+    <link rel="stylesheet" href="/stylesheets/components/product-card.css" />
+    <style>
+      .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 30px;
+      }
+
+      .view-more {
+        margin: 30px;
+        display: flex;
+        justify-content: center;
+
+        & a {
+          font-size: 1.1rem;
+          text-decoration: none;
+          color: #4d4d4d;
+          border: 1px solid #4d4d4d;
+          padding: 7px 19px;
+          border-radius: 5px;
+          box-shadow: 1px 1px 3px #4d4d4db3;
+        }
+      }
+    </style>
   </head>
 
   <body>
     <%- include('components/navbar.html') %>
 
     <main>
-      <h1>Hi <%= locals.user?.fullName || 'Guest' %></h1>
-      Some content to go here...
+      <h1>Featured products</h1>
+
+      <div class="products">
+        <% locals.products.forEach(product => {%> <%-
+        include('./components/product_cart.html', {product}) %> <%}) %>
+      </div>
+
+      <div class="view-more">
+        <a href="/products">View more</a>
+      </div>
     </main>
   </body>
 </html>
