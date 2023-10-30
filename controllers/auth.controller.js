@@ -51,6 +51,7 @@ export async function login(req, res, next) {
   }
 
   const passwordMatch = await verifyPassword(password, user.hashedPassword);
+  delete user.hashedPassword
 
   if (!passwordMatch) {
     return res.status(422).render("auth/login", {
