@@ -8,13 +8,7 @@ class Cart {
       },
     });
 
-    if (res.ok) {
-      const cart = await res.json();
-
-      return cart;
-    }
-
-    console.log(res.statusText);
+    return this.formatJsonResponse(res);
   }
 
   async removeFromCart(cartItemId) {
@@ -24,13 +18,30 @@ class Cart {
         "Content-Type": "application/json",
       },
     });
-    const data = await res.json();
 
-    if (res.ok) {
-      return { ok: res.ok, cart: data, error: null };
+    return this.formatJsonResponse(res);
+  }
+
+  async updateCart(cartItemId, quantity) {
+    const res = await fetch(`/cart`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ quantity, cartItemId }),
+    });
+
+    return this.formatJsonResponse(res);
+  }
+
+  async formatJsonResponse(response) {
+    const data = await response.json();
+
+    if (response.ok) {
+      return { ok: response.ok, cart: data, error: null };
     }
 
-    return { ok: res.ok, error: data.message };
+    return { ok: response.ok, error: data.message };
   }
 }
 

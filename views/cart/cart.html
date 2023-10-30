@@ -17,7 +17,11 @@
           <span>(<%= locals.cart.cartItems.length %> products)</span>
 
           <% locals.cart.cartItems.forEach(cartItem => {%>
-          <div class="cart-item">
+          <div
+            class="cart-item"
+            data-cart-item-id="<%= cartItem.id %>"
+            data-cart-item-quantity="<%= cartItem.quantity %>"
+          >
             <img
               src="<%= cartItem.product.imageUrl %>"
               alt="<%= cartItem.product.title %>"
@@ -25,14 +29,16 @@
             <span class="title"><%= cartItem.product.title %></span>
 
             <div class="quantity">
-              <button>&plus;</button>
+              <button data-increase-cart-item="true">&plus;</button>
               <span><%= cartItem.quantity %></span>
-              <button>&minus;</button>
+              <button data-decrease-cart-item="true" <%= cartItem.quantity === 1 ? 'disabled':'' %> >&minus;</button>
             </div>
 
             <span class="price">$<%= cartItem.product.priceCents / 100 %></span>
 
-            <button class="delete-item" data-cart-item-id="<%= cartItem.id %>">&times;</button>
+            <button class="delete-item" data-delete-cart-item="true">
+              &times;
+            </button>
           </div>
           <%}) %>
         </div>

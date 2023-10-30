@@ -26,13 +26,13 @@
   </ul>
 </nav>
 
-<script>
-  const cart = document.querySelector('.cart')
+<script type="module">
+  const cartNav = document.querySelector('nav .cart')
   const cartItems = globalData.cart.cartItems
   const cartItemsCount = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
   );
 
-  cart.textContent = cart.textContent + ` (${cartItemsCount})`
+  cartNav.textContent = cartNav.textContent + ` (${cartItemsCount})`
 </script>
