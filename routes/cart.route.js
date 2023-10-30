@@ -8,7 +8,6 @@ import {
 } from "../controllers/cart.controller.js";
 
 const router = Router();
-router.use(isAuthenticated);
 
 router.get("/", getCart);
 
