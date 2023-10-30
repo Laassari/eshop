@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/pages/products.css" />
+    <link rel="stylesheet" href="/stylesheets/components/product-card.css" />
     <title>eShop - Products</title>
     <%- include('../components/head_common.html') %>
     <script type="module" src="/javascript/pages/products/index.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <%- include('../components/navbar.html') %>
 
-    <h1>Products</h1>
-
-    <div style="display: flex; flex-wrap: wrap;gap: 10px">
-        <% locals.products.forEach(product => {%>
-            <a href="/products/<%= product.id %>" style="display: flex; flex-direction: column;">
-                <img src="<%= product.imageUrl %>" width="400" height="300" style="object-fit: contain;" />
-                <span style="max-width: 200px;"><%= product.title %></span>
-                $<%= product.priceCents / 100 %>    
-            </a>
-            <br />
-        <%}) %>
-    </div>
-    
-</body>
+    <main>
+      <h1>Products</h1>
+      <div class="products">
+        <% locals.products.forEach(product => {%> <%-
+        include('../components/product_cart.html', {product}) %> <%}) %>
+      </div>
+    </main>
+  </body>
 </html>
