@@ -1,19 +1,19 @@
 import Product from "../models/Product.js";
 
-export const index = async (req, res, next) => {
+export const index = async (req, res) => {
   const products = await Product.getProducts();
 
-  res.render("products/index", { products, isLoggedIn: !!req.session.user });
+  res.render("products/index", { products });
 };
 
-export const show = async (req, res, next) => {
+export const show = async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
     return res.sendStatus(404);
   }
 
-  res.render("products/show", { product, isLoggedIn: !!req.session.user });
+  res.render("products/show", { product });
 };
 
 export const destroy = async (req, res) => {
