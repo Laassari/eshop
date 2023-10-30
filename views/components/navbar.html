@@ -4,7 +4,12 @@
   <ul class="navbar">
     <li><a href="/">Home</a></li>
     <li><a href="/products">Products</a></li>
-    <li><a href="/cart" class="cart">Cart</a></li>
+    <li>
+      <a href="/cart" class="cart">
+        Cart (<%= locals.cart.cartItems.map(i => +i.quantity).reduce((a, b) => a + b, 0) %>)
+      </a
+      >
+    </li>
     <li><a href="/profile">Profile</a></li>
     <% if (!!locals.user) {%>
     <li>
@@ -25,14 +30,3 @@
     <% }%>
   </ul>
 </nav>
-
-<script type="module">
-  const cartNav = document.querySelector('nav .cart')
-  const cartItems = globalData.cart.cartItems
-  const cartItemsCount = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
-
-  cartNav.textContent = cartNav.textContent + ` (${cartItemsCount})`
-</script>
