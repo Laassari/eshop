@@ -4,7 +4,7 @@ import { isAuthenticated } from "./index.js";
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.render("index");
+  res.render("home");
 });
 
 router.get("/profile", isAuthenticated, (req, res) => {
