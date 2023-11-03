@@ -1,7 +1,6 @@
 <html>
   <head>
     <title>eShop - Profile</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
     <style>
       td {
         border: 0.5px solid #333;
@@ -18,7 +17,7 @@
     <%- include('components/navbar.html') %>
 
     <main>
-      <h1>Hi <%= locals.user.fullName || 'Guest' %></h1>
+      <h1>Hi <%= locals.user.fullName %></h1>
       <table>
         <tbody>
           <tr>
