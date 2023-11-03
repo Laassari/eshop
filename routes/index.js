@@ -6,7 +6,7 @@ import cartRoutes from "./cart.route.js";
 export function isAuthenticated(req, res, next) {
   if (req.session.user) return next();
 
-  res.status(401).redirect(`/auth/signup?redirect_to=${req.url}`);
+  res.status(401).redirect(`/auth/login?redirect_to=${req.originalUrl}`);
 }
 
 export function mountRoutes(app) {

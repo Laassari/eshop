@@ -51,7 +51,7 @@ export async function login(req, res, next) {
   }
 
   const passwordMatch = await verifyPassword(password, user.hashedPassword);
-  delete user.hashedPassword
+  delete user.hashedPassword;
 
   if (!passwordMatch) {
     return res.status(422).render("auth/login", {
@@ -64,7 +64,8 @@ export async function login(req, res, next) {
     req.session.save(function (err) {
       if (err) next(err);
 
-      res.redirect(req.query.redirect_to || "/");
+      const redirectTo = getQueryFromOwnReferer(req, "redirect_to");
+      res.redirect(redirectTo || "/");
     });
   });
 }
@@ -85,4 +86,15 @@ async function emailIsUnique(email) {
   if (user) throw new Error("Email already exists");
 
   return true;
+}
+
+function getQueryFromOwnReferer({ headers, hostname }, query) {
+  if (!headers.referer) return null;
+
+  const refererUrl = new URL(headers.referer);
+
+  if (refererUrl.hostname === hostname)
+    return refererUrl.searchParams.get(query)
+
+  return null;
 }
