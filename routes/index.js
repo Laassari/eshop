@@ -2,6 +2,7 @@ import homeRoutes from "./home.route.js";
 import authRoutes from "./auth.route.js";
 import productsRoutes from "./products.route.js";
 import cartRoutes from "./cart.route.js";
+import profileRoutes from "./profile.route.js";
 
 export function isAuthenticated(req, res, next) {
   if (req.session.user) return next();
@@ -14,4 +15,5 @@ export function mountRoutes(app) {
   app.use("/auth", authRoutes);
   app.use("/products", productsRoutes);
   app.use("/cart", cartRoutes);
+  app.use("/profile", profileRoutes);
 }

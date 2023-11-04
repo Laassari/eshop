@@ -11,8 +11,4 @@ router.get("/", async (req, res) => {
   res.render("home", { products });
 });
 
-router.get("/profile", isAuthenticated, (req, res) => {
-  res.render("profile");
-});
-
 export default router;

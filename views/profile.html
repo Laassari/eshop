@@ -11,33 +11,52 @@
       }
     </style>
     <%- include('./components/head_common.html') %>
+    <style>
+      main {
+        max-width: 1200px;
+        margin: 20px auto 0;
+      }
+    </style>
   </head>
 
   <body>
     <%- include('components/navbar.html') %>
 
     <main>
-      <h1>Hi <%= locals.user.fullName %></h1>
-      <table>
-        <tbody>
-          <tr>
-            <td>id</td>
-            <td><%= locals.user.id %></td>
-          </tr>
-          <tr>
-            <td>Name</td>
-            <td><%= locals.user.fullName %></td>
-          </tr>
-          <tr>
-            <td>email</td>
-            <td><%= locals.user.email %></td>
-          </tr>
-          <tr>
-            <td>role</td>
-            <td><%= locals.user.role %></td>
-          </tr>
-        </tbody>
-      </table>
+      <h1><%= locals.user.fullName %> / Profile</h1>
+
+      <form action="" method="post">
+        <div class="row">
+          <label for="full_name">Full name</label>
+          <input
+            type="text"
+            name="full_name"
+            id="full_name"
+            value="<%= locals.user.fullName %>"
+          />
+        </div>
+        <div class="row">
+          <label for="email">email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value="<%= locals.user.email %>"
+          />
+        </div>
+        <div class="row">
+          <label for="role">Role</label>
+          <input
+            type="text"
+            name="role"
+            id="role"
+            value="<%= locals.user.role %>"
+            readonly
+          />
+        </div>
+
+        <button type="submit">Update</button>
+      </form>
     </main>
   </body>
 </html>
