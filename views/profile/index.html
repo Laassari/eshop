@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <title>eShop - Profile</title>
+    <%- include('../components/head_common.html') %>
+    <style>
+      main {
+        max-width: 1200px;
+        margin: 20px auto 0;
+      }
+
+      .content {
+        display: flex;
+        gap: 50px;
+      }
+
+      aside {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        & a {
+          color: #757575;
+          text-decoration: none;
+        }
+      }
+
+      form {
+        width: 100%;
+        max-width: 600px;
+
+        & .row {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          margin-bottom: 20px;
+
+          & label {
+            font-size: 1rem;
+            color: black;
+          }
+
+          & input {
+            padding: 10px;
+            border-radius: 12px;
+            border: 2px solid #e7e7e9;
+            color: #0d0c22;
+
+            &:read-only {
+              color: #868686;
+              background-color: #f9f9f9;
+            }
+          }
+        }
+
+        & button {
+          background-color: black;
+          cursor: pointer;
+          color: white;
+          padding: 12px 50px;
+          border-radius: 10px;
+          border: none;
+          font-size: 1rem;
+        }
+
+        & button:focus {
+          box-shadow: 2px 1px 4px rgb(40 40 40 / 67%);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('../components/navbar.html') %>
+
+    <main>
+      <h2><%= locals.user.fullName %> / Profile</h2>
+
+      <div class="content">
+        <aside>
+          <a href="/profile"><b>General</b></a>
+          <a href="/profile/address">Address</a>
+          <a href="/profile">Orders</a>
+          <a href="/profile">Payment info</a>
+        </aside>
+
+        <form action="" method="post">
+          <div class="row">
+            <label for="full_name">Full name</label>
+            <input
+              type="text"
+              name="full_name"
+              id="full_name"
+              value="<%= locals.user.fullName %>"
+            />
+          </div>
+          <div class="row">
+            <label for="email">email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value="<%= locals.user.email %>"
+            />
+          </div>
+          <div class="row">
+            <label for="role">Role</label>
+            <input
+              type="text"
+              name="role"
+              id="role"
+              value="<%= locals.user.role %>"
+              readonly
+            />
+          </div>
+
+          <button type="submit">Update</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

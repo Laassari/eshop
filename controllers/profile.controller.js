@@ -2,7 +2,17 @@ import { body, validationResult, matchedData } from "express-validator";
 import UserAddress from "../models/UserAddress.js";
 
 export const index = (req, res) => {
-  res.render("profile");
+  res.render("profile/index");
+};
+
+export const address = async (req, res, next) => {
+  try {
+    const userAddress = await UserAddress.findForUser(req.session.user.id);
+
+    res.render("profile/address", { address: userAddress });
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const createValidation = [
@@ -17,7 +27,7 @@ export const createValidation = [
   body("address", "Address is required").isLength({ max: 255 }).exists(),
 ];
 
-export const create = async (req, res, next) => {
+export const createOrUpdate = async (req, res, next) => {
   const { city, zipCode, address } = matchedData(req);
   const result = validationResult(req);
 
@@ -26,14 +36,14 @@ export const create = async (req, res, next) => {
   }
 
   try {
-    const userAddress = await UserAddress.create({
+    const userAddress = await UserAddress.createOrUpdate({
       city,
       zipCode,
       address,
       userId: req.session.user.id,
     });
 
-    res.render("profile", { userAddress });
+    res.render("profile/address", { address: userAddress });
   } catch (error) {
     next(error);
   }
