@@ -1,49 +1,29 @@
 import { body, validationResult, matchedData } from "express-validator";
-import UserAddress from "../models/UserAddress.js";
+import User from "../models/user.js";
 
 export const index = (req, res) => {
   res.render("profile/index");
 };
 
-export const address = async (req, res, next) => {
-  try {
-    const userAddress = await UserAddress.findForUser(req.session.user.id);
-
-    res.render("profile/address", { address: userAddress });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const createValidation = [
-  body("city", "City is required")
-    .isString()
-    .isLength({ max: 90, min: 3 })
-    .exists(),
-  body("zipCode", "Invalid ZipCode")
-    .optional()
-    .isAlphanumeric()
-    .isLength({ max: 10 }),
-  body("address", "Address is required").isLength({ max: 255 }).exists(),
+export const updateUserInfoValidation = [
+  body("email", "Invalid email").isEmail().isLength({ max: 100 }).exists(),
+  body("fullName", "Invalid name").isLength({ max: 25, min: 4 }).exists(),
 ];
 
-export const createOrUpdate = async (req, res, next) => {
-  const { city, zipCode, address } = matchedData(req);
+export const updateUserInfo = async (req, res, next) => {
+  const { email, fullName } = matchedData(req);
   const result = validationResult(req);
 
-  if (!result.isEmpty()) {
-    return res.status(400).send(result.array({ onlyFirstError: true }));
-  }
-
-  try {
-    const userAddress = await UserAddress.createOrUpdate({
-      city,
-      zipCode,
-      address,
-      userId: req.session.user.id,
+  if (!result.isEmpty())
+    return res.status(422).render("profile/index", {
+      errors: result.array({ onlyFirstError: true }),
     });
 
-    res.render("profile/address", { address: userAddress });
+  try {
+    const user = await User.update(req.session.user.id, { email, fullName });
+
+    req.session.user = user;
+    res.render("profile/index", { user });
   } catch (error) {
     next(error);
   }
