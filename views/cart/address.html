@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>eShop - Cart / Address</title>
+    <%- include('../components/head_common.html') %>
+    <style>
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      form {
+        width: 100%;
+        max-width: 600px;
+
+        & .row {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          margin-bottom: 20px;
+
+          & label {
+            font-size: 1rem;
+            color: black;
+          }
+
+          & input {
+            padding: 10px;
+            border-radius: 12px;
+            border: 2px solid #e7e7e9;
+            color: #0d0c22;
+          }
+        }
+
+        & button {
+          background-color: black;
+          cursor: pointer;
+          color: white;
+          padding: 12px 50px;
+          border-radius: 10px;
+          border: none;
+          font-size: 1rem;
+        }
+
+        & button:focus {
+          box-shadow: 2px 1px 4px rgb(40 40 40 / 67%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../components/navbar.html')%>
+
+    <main>
+      <h1>Address</h1>
+
+      <form method="post">
+        <div class="row">
+          <label for="city">City</label>
+          <input
+            type="text"
+            name="city"
+            id="city"
+            placeholder="Marakech"
+            value="<%= locals.address.city %>"
+          />
+        </div>
+        <div class="row">
+          <label for="zipCode">Zip Code</label>
+          <input
+            type="text"
+            name="zipCode"
+            id="zipCode"
+            placeholder="90000"
+            value="<%= locals.address.zipCode %>"
+          />
+        </div>
+        <div class="row">
+          <label for="address">Address</label>
+          <input
+            type="text"
+            name="address"
+            id="address"
+            placeholder="23nd street..."
+            value="<%= locals.address.address %>"
+          />
+        </div>
+
+        <button type="submit">Update</button>
+      </form>
+    </main>
+  </body>
+</html>

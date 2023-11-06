@@ -30,7 +30,10 @@
             <div class="quantity">
               <button data-increase-cart-item="true">&plus;</button>
               <span><%= cartItem.quantity %></span>
-              <button data-decrease-cart-item="true" <%= cartItem.quantity === 1 ? 'disabled':'' %> >&minus;</button>
+              <button
+                data-decrease-cart-item="true" 
+                <%= (cartItem.quantity == 1) && "disabled" %>
+                >&minus;</button>
             </div>
 
             <span class="price">$<%= cartItem.product.priceCents / 100 %></span>
@@ -57,7 +60,7 @@
             <span>$<%= locals.cart.total %></span>
           </div>
 
-          <button class="checkout">Continue to checkout</button>
+          <a href="/cart/address" class="checkout">Continue to checkout</a>
         </div>
       </div>
     </main>

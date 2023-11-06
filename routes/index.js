@@ -1,7 +1,7 @@
 import homeRoutes from "./home.route.js";
 import authRoutes from "./auth.route.js";
 import productsRoutes from "./products.route.js";
-import cartRoutes from "./cart.route.js";
+import cartRoutes from "./cart/index.js";
 import profileRoutes from "./profile/index.js";
 
 export function isAuthenticated(req, res, next) {

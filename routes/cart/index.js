@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { isAuthenticated } from "./index.js";
 import {
   addToCart,
   getCart,
   removeFromCart,
   updateCart,
-} from "../controllers/cart.controller.js";
+} from "../../controllers/cart.controller.js";
+import CartAddressRoutes from "./address.route.js";
+import { isAuthenticated } from "../index.js";
 
 const router = Router();
 
@@ -20,5 +21,7 @@ router.post("/clear-cart", (req, res) => {
 
   res.sendStatus(200);
 });
+
+router.use("/address", isAuthenticated, CartAddressRoutes);
 
 export default router;
