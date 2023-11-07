@@ -1,0 +1,59 @@
+<style>
+  .cart-summary {
+    flex-basis: 30%;
+    background-color: #f3f3f8;
+    border-radius: 14px;
+    padding: 20px;
+
+    & h2 {
+      margin-top: 0;
+    }
+
+    & .summary-row {
+      display: flex;
+      justify-content: space-between;
+      color: #8b8aa9;
+
+      + .summary-row {
+        margin-top: 15px;
+      }
+    }
+
+    & .total {
+      color: black;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+
+    & a.checkout {
+      display: block;
+      background-color: black;
+      color: white;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      text-decoration: none;
+      text-align: center;
+    }
+  }
+</style>
+<div class="cart-summary">
+  <h2>Order summary</h2>
+
+  <div class="summary-row">
+    <span>Subtotal</span>
+    <span>$<%= locals.cart.subTotal %></span>
+  </div>
+  <div class="summary-row">
+    <span>Shipping</span>
+    <span>$<%= locals.cart.shipping %></span>
+  </div>
+  <div class="summary-row total">
+    <span>Total</span>
+    <span>$<%= locals.cart.total %></span>
+  </div>
+
+  <% if (locals.withAction) { %>
+  <a href="/cart/address" class="checkout">Continue to checkout</a>
+  <% } %>
+</div>

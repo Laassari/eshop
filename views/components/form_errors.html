@@ -1,0 +1,10 @@
+<div style="color: red">
+  <% if(locals.errors?.length) {%>
+  <p>Errors occured:</p>
+  <ul>
+    <% locals.errors.forEach(function(error){ %>
+    <li><%=error.msg%></li>
+    <% }) %>
+  </ul>
+  <% } %>
+</div>

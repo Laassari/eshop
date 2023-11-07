@@ -44,24 +44,9 @@
           </div>
           <%}) %>
         </div>
-        <div class="cart-summary">
-          <h2>Order summary</h2>
-
-          <div class="summary-row">
-            <span>Subtotal</span>
-            <span>$<%= locals.cart.subTotal %></span>
-          </div>
-          <div class="summary-row">
-            <span>Shipping</span>
-            <span>$<%= locals.cart.shipping %></span>
-          </div>
-          <div class="summary-row total">
-            <span>Total</span>
-            <span>$<%= locals.cart.total %></span>
-          </div>
-
-          <a href="/cart/address" class="checkout">Continue to checkout</a>
-        </div>
+        
+        
+      <%- include('../components/cart_summary.html', { withAction: true}) %>
       </div>
     </main>
   </body>

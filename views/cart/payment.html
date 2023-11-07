@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>eShop - Cart / Address</title>
+    <title>eShop - Cart / Payment</title>
     <%- include('../components/head_common.html') %>
     <style>
       main {
@@ -9,7 +9,7 @@
         margin: 0 auto;
       }
 
-      .cart-address {
+      .cart-payment {
         display: flex;
         align-items: flex-start;
         gap: 20px;
@@ -60,41 +60,40 @@
     <%- include('../components/navbar.html')%>
 
     <main>
-      <h1>Address</h1>
+      <h1>Payment Info</h1>
 
-      <div class="cart-address">
+      <div class="cart-payment">
         <form method="post">
           <div class="row">
-            <label for="city">City</label>
+            <label for="cardHolderName">Cardholder Name</label>
             <input
               type="text"
-              name="city"
-              id="city"
-              placeholder="Marakech"
-              value="<%= locals.address.city %>"
+              name="cardHolderName"
+              id="cardHolderName"
+              placeholder="John Doe"
             />
           </div>
           <div class="row">
-            <label for="zipCode">Zip Code</label>
+            <label for="cardNumber">Card Number</label>
             <input
               type="text"
-              name="zipCode"
-              id="zipCode"
-              placeholder="90000"
-              value="<%= locals.address.zipCode %>"
+              name="cardNumber"
+              id="cardNumber"
+              placeholder="4111 1111 1111 1111"
             />
           </div>
           <div class="row">
-            <label for="address">Address</label>
+            <label for="cardExpiry">Expiration</label>
             <input
-              type="text"
-              name="address"
-              id="address"
-              placeholder="23nd street..."
-              value="<%= locals.address.address %>"
+              type="month"
+              name="cardExpiry"
+              id="cardExpiry"
+              placeholder="MM/YY"
             />
           </div>
-          <button type="submit">Proceed to Payment</button>
+          <button type="submit">Buy</button>
+
+          <%- include('../components/form_errors.html', { errors: locals.errors }) %>
         </form>
 
         <%- include('../components/cart_summary.html', { withAction: false}) %>

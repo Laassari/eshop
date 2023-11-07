@@ -14,15 +14,6 @@
       <input type="submit" value="Submit" />
     </form>
 
-    <div style="color: red">
-      <% if(locals.errors?.length) {%>
-      <p>Errors occured:</p>
-      <ul>
-        <% locals.errors.forEach(function(error){ %>
-        <li><%=error.msg%></li>
-        <% }) %>
-      </ul>
-      <% } %>
-    </div>
+    <%- include('../components/form_errors.html', { errors: locals.errors }) %>
   </body>
 </html>

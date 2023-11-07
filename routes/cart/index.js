@@ -6,6 +6,7 @@ import {
   updateCart,
 } from "../../controllers/cart.controller.js";
 import CartAddressRoutes from "./address.route.js";
+import CartPaymentRoutes from "./payment.route.js";
 import { isAuthenticated } from "../index.js";
 
 const router = Router();
@@ -23,5 +24,6 @@ router.post("/clear-cart", (req, res) => {
 });
 
 router.use("/address", isAuthenticated, CartAddressRoutes);
+router.use("/payment", isAuthenticated, CartPaymentRoutes);
 
 export default router;
