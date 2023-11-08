@@ -1,0 +1,17 @@
+CREATE TABLE orders (
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+	total INTEGER NOT NULL CHECK (total > 0),
+	sub_total INTEGER NOT NULL CHECK (sub_total > 0),
+	shipping INTEGER NOT NULL,
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE order_items (
+	id SERIAL,
+	order_id INTEGER NOT NULL REFERENCES orders (id) ON DELETE CASCADE,
+	product_id INTEGER NOT NULL REFERENCES products (id) ON DELETE SET NULL, 
+	quantity INTEGER NOT NULL CHECK (quantity > 0),
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (order_id, product_id)
+);

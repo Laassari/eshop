@@ -25,9 +25,9 @@ export const processCart = async (req, res) => {
   }
 
   try {
-    const orderId = await CartInstance.processCart();
+    const order = await CartInstance.processCart(req.session.user.id);
 
-    res.rdirect(`cart/order/${orderId}`);
+    res.redirect(`/order/${order.id}`);
   } catch (error) {
     console.error(error);
     res.render("cart/payment", { errors: [{ msg: error }] });

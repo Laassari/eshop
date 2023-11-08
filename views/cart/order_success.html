@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>eShop - Order completed</title>
+    <%- include('../components/head_common.html') %>
+    <style>
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../components/navbar.html')%>
+
+    <main>
+      <h1>Order success: #<%= order.id %></h1>
+
+      <p>You order has been placed. you should receive an email shortly</p>
+    </main>
+  </body>
+</html>
