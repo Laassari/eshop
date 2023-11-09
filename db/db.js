@@ -20,10 +20,8 @@ export const transaction = async (cb) => {
   }
 };
 
-export const inniDbtConnection = () => {
-  const client = new pg.Client();
-
-  return client.connect();
+export const inniDbtConnection = async () => {
+  return pool.connect().then((client) => client.release());
 };
 
 export { SQL };
