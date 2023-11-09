@@ -1,8 +1,8 @@
 import BaseModel from "./BaseModel.js";
-import { query, SQL } from "../db/db.js";
+import { SQL } from "../db/db.js";
 
 class OrderItemSingelton extends BaseModel {
-  async create({ orderId, productId, quantity }) {
+  async create(query, { orderId, productId, quantity }) {
     const { rows } = await query(SQL`
         INSERT INTO order_items
                (order_id, product_id, quantity)
