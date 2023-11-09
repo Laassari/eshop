@@ -25,7 +25,7 @@ export const processCart = async (req, res) => {
   }
 
   try {
-    const order = await CartInstance.processCart(req.session.user.id);
+    const order = await CartInstance.processCart(req.session.user);
 
     res.redirect(`/order/${order.id}`);
   } catch (error) {

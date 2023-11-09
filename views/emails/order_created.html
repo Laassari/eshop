@@ -1,0 +1,25 @@
+<p>Dear <%= locals.user.fullName %>,</p>
+<p>
+  Thank you for placing an order with eShop. We are pleased to confirm the
+  receipt of your order #<%= order.id %>, dated <%= new
+  Intl.DateTimeFormat("en-US", { weekday: "long", year: "numeric", month:
+  "long", day: "numeric", }).format(order.createdAt) %>.
+</p>
+
+<p>
+  Order details:
+  <br />
+  <b>Total Amount</b>: $<%= order.total %>
+  <br />
+  <b>Subtotal </b>: $<%= order.subTotal %>
+  <br />
+  <b>Shipping </b>: $<%= order.shipping %>
+</p>
+
+<p>
+  Your order is now being processed and we will ensure its prompt dispatch. You
+  will receive a notification once your order has been shipped.
+</p>
+
+<p>Warm regards,</p>
+<p>eShop.</p>
