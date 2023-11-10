@@ -15,6 +15,37 @@ class OrderSingelton extends BaseModel {
     return this.formatRow(rows[0]);
   }
 
+  async findForUser(userId) {
+    const { rows } = await q(SQL`
+      SELECT
+        o.*,
+        json_agg(items.*) AS order_items,
+        json_agg(p.*) AS products
+      FROM
+        orders o
+        JOIN order_items items ON o.id = items.order_id
+        JOIN products p on p.id = items.product_id
+      WHERE
+        o.user_id = ${userId}
+      GROUP BY
+        o.id
+      ORDER BY
+        o.created_at DESC
+    `);
+
+    return rows.map((order) => {
+      const { products, order_items, ...rest } = order;
+
+      return {
+        ...this.formatRow(rest),
+        orderItems: order_items.map((item, idx) => ({
+          ...this.formatRow(item),
+          product: this.formatRow(products[idx]),
+        })),
+      };
+    });
+  }
+
   async create(query, { userId, total, subTotal, shipping }) {
     const { rows } = await query(SQL`
         INSERT INTO orders

@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <title>eShop - Profile</title>
+    <%- include('../components/head_common.html') %>
+    <style>
+      main {
+        max-width: 1200px;
+        margin: 20px auto 0;
+      }
+
+      .content {
+        display: flex;
+        gap: 50px;
+      }
+
+      aside {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        & a {
+          color: #757575;
+          text-decoration: none;
+        }
+      }
+
+      .orders {
+        width: 100%;
+        max-width: 800px;
+
+        & .order-card {
+          background-color: #fafafa;
+          margin-bottom: 30px;
+          border-radius: 5px;
+          box-shadow: 1px 0px 3px #d3d3d3bd;
+          padding: 15px;
+
+          & .order-header {
+            margin-bottom: 10px;
+          }
+
+          & .order-id {
+            font-size: 1rem;
+            margin-right: 10px;
+          }
+
+          .order-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            height: 80px;
+
+            & img {
+              height: 80px;
+              width: 100px;
+              object-fit: cover;
+              border-radius: 10px;
+              margin-right: 10px;
+            }
+
+            & .title {
+              flex-grow: 1;
+              margin-right: 10px;
+            }
+
+            & .price {
+              font-size: 1.3rem;
+              flex-shrink: 0;
+
+              & .times {
+                color: #9b9b9b;
+                margin-right: 4px;
+              }
+            }
+
+            hr {
+              margin: 10px 0;
+            }
+          }
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('../components/navbar.html') %>
+
+    <main>
+      <h2><%= locals.user.fullName %> / Address</h2>
+
+      <div class="content">
+        <aside>
+          <a href="/profile">General</a>
+          <a href="/profile/address">Address</a>
+          <a href="/profile/orders"><b>Orders</b></a>
+        </aside>
+
+        <div class="orders">
+          <% if (locals.orders.length === 0) { %>
+              <p>No orders created yet!</p>
+          <% } %>
+
+          <% locals.orders.forEach(order => { %>
+          <div class="order-card">
+            <div class="order-header">
+              <span class="order-id"><b>Order #<%= order.id*199231 %></b></span>
+              <span class="creation-date"
+                ><%= new Intl.DateTimeFormat("en-US", { year: "numeric", month:
+                "long", day: "numeric", hour:'numeric', minute:'numeric'
+                }).format(order.createdAt) %></span
+              >
+            </div>
+
+            <div class="order-items">
+              <% order.orderItems.forEach(item=>{ %>
+              <div class="order-item">
+                <img
+                  src="<%= item.product.imageUrl %>"
+                  alt="<%= item.product.title %>"
+                />
+                <span class="title"><%= item.product.title %></span>
+
+                <span class="price"
+                  >(<%=item.quantity %>) <span class="times">&times;</span> $<%=
+                  item.product.priceCents / 100 %>
+                </span>
+              </div>
+              <hr />
+              <% }) %>
+            </div>
+
+            <div>
+              <b>Total Amount</b>: $<%= order.total %>
+              <br />
+              <br />
+              <b>Subtotal </b>: $<%= order.subTotal %>
+              <br />
+              <br />
+              <b>Shipping </b>: $<%= order.shipping %>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
