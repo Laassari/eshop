@@ -1,0 +1,41 @@
+main {
+  max-width: 1200px;
+  margin: 40px auto 0;
+}
+
+.product-hero {
+  display: flex;
+  column-gap: 20px;
+  color: #4b5563;
+
+  & img {
+    width: 50%;
+    max-height: 400px;
+    object-fit: contain;
+  }
+
+  & .product-details {
+    & .description {
+      line-height: 24px;
+    }
+
+    & .price {
+      margin: 15px 0px;
+    }
+
+    & .add-to-cart {
+      display: block;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 2px 1px 4px #8c8c8c;
+
+      &:hover {
+        box-shadow: inset 2px 1px 4px #8c8c8c;
+      }
+    }
+  }
+}

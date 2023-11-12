@@ -4,24 +4,25 @@
     <title>eShop - <%= product.title %></title>
     <%- include('../components/head_common.html') %>
     <script type="module" src="/javascript/pages/products/show.js"></script>
+    <link rel="stylesheet" href="/stylesheets/pages/product.css" />
   </head>
   <body>
     <%- include('../components/navbar.html') %>
 
-    <h1><%= product.title %></h1>
+    <main>
+      <h1><%= product.title %></h1>
 
-    <div
-      style="display: flex; flex-wrap: wrap; flex-direction: column; gap: 10px"
-    >
-      <img
-        src="<%= product.imageUrl %>"
-        style="object-fit: contain; max-height: 50vh; align-self: start;"
-      />
-      <span style="max-width: 200px"><%= product.title %></span>
-      $<%= product.priceCents / 100 %>    
-      <button style="width: 100px;" class="add-to-cart" data-product-id="<%= product.id %>">Add to cart</button>
+      <div class="product-hero">
+        <img src="<%= product.imageUrl %>" alt="<%= product.title %>" />
 
-      <p><%= product.description %></p>
-    </div>
+        <div class="product-details">
+          <p class="description"><%= product.description %></p>
+          <div class="price">Price: $<%= product.priceCents / 100 %></div>
+          <button class="add-to-cart" data-product-id="<%= product.id %>">
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
