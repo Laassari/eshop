@@ -39,3 +39,15 @@ main {
     }
   }
 }
+
+.related-products {
+  & h2 {
+    margin: 40px 0;
+  }
+
+  & .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+  }
+}

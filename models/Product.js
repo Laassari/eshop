@@ -54,6 +54,15 @@ class ProductSingelton extends BaseModel {
 
     return this.formatRow(rows[0]);
   }
+
+  // TODO: return real related products
+  async findRelatedFor(id) {
+    const { rows } = await query(SQL`
+      SELECT * FROM products limit 10
+    `);
+
+    return rows.map(this.formatRow);
+  }
 }
 
 export default new ProductSingelton();

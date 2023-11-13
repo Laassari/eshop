@@ -7,13 +7,18 @@ export const index = async (req, res) => {
 };
 
 export const show = async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const { id } = req.params;
+
+  const [product, relatedProducts] = await Promise.all([
+    Product.findById(id),
+    Product.findRelatedFor(id),
+  ]);
 
   if (!product) {
     return res.sendStatus(404);
   }
 
-  res.render("products/show", { product });
+  res.render("products/show", { product, relatedProducts });
 };
 
 export const destroy = async (req, res) => {

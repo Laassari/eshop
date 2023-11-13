@@ -5,6 +5,7 @@
     <%- include('../components/head_common.html') %>
     <script type="module" src="/javascript/pages/products/show.js"></script>
     <link rel="stylesheet" href="/stylesheets/pages/product.css" />
+    <link rel="stylesheet" href="/stylesheets/components/product-card.css" />
   </head>
   <body>
     <%- include('../components/navbar.html') %>
@@ -21,6 +22,16 @@
           <button class="add-to-cart" data-product-id="<%= product.id %>">
             Add to cart
           </button>
+        </div>
+      </div>
+
+      <div class="related-products">
+        <h2>Related products</h2>
+
+        <div class="cards">
+          <% locals.relatedProducts.forEach(product =>{ %>
+            <%-include('../components/product_card.html', { product }) %>
+          <% }) %>
         </div>
       </div>
     </main>
