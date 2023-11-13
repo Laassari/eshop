@@ -11,7 +11,7 @@ export const show = async (req, res) => {
 
   const [product, relatedProducts] = await Promise.all([
     Product.findById(id),
-    Product.findRelatedFor(id),
+    Product.findRelatedFor(id, 8),
   ]);
 
   if (!product) {

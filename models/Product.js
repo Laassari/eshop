@@ -55,10 +55,40 @@ class ProductSingelton extends BaseModel {
     return this.formatRow(rows[0]);
   }
 
-  // TODO: return real related products
-  async findRelatedFor(id) {
+  async findRelatedFor(productId, limit) {
     const { rows } = await query(SQL`
-      SELECT * FROM products limit 10
+      WITH orders_with_similar_product AS (
+        SELECT
+          ARRAY_AGG(product_id) AS pids
+        FROM
+          order_items
+        GROUP BY
+          order_id
+        HAVING
+          ${productId} = ANY (ARRAY_AGG(product_id))
+          AND COUNT(product_id) > 1
+      ),
+      related_product_ids AS (
+        SELECT
+          UNNEST(pids) AS pid
+        FROM
+          orders_with_similar_product
+        GROUP BY
+          pid
+        ORDER BY
+          COUNT(*)
+          DESC
+          -- 	offset to remove the product in question
+        LIMIT ${limit} OFFSET 1
+      )
+      SELECT
+        *
+      FROM
+        products
+      WHERE
+        id IN(
+          SELECT
+            pid FROM related_product_ids);
     `);
 
     return rows.map(this.formatRow);
