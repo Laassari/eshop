@@ -2,6 +2,7 @@
   border: 1px solid #c2c2c2;
   border-radius: 10px;
   padding: 10px;
+  position: relative;
 
   & a {
     text-decoration: none;
@@ -30,5 +31,17 @@
       font-size: 1.2rem;
       font-weight: bold;
     }
+  }
+
+  & .category {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 6px;
+    background: #535353;
+    color: #dcdcdc;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    border-top-right-radius: 9px;
   }
 }

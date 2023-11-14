@@ -39,13 +39,13 @@ class ProductSingelton extends BaseModel {
   }
 
   async create(product) {
-    const { title, description, price, imageUrl } = product;
+    const { title, description, price, category, imageUrl } = product;
 
     const { rows } = await query(
       SQL`INSERT INTO
         products
-                (title, description, price, image_url)
-        values (${title}, ${description}, ${price}, ${imageUrl})
+                (title, description, price, image_url, category)
+        values (${title}, ${description}, ${price}, ${imageUrl}, ${category})
         RETURNING *
       `
     );
