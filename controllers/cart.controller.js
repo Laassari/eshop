@@ -39,6 +39,6 @@ export const removeFromCart = (req, res) => {
     res.send(cart);
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: error.toString() });
+    res.status(400).send({ message: error.toString() });
   }
 };
