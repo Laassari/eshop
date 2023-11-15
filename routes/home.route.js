@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   // TODO: return featured products
-  const products = await Product.getProducts({ limit: 8 });
+  const products = await Product.getProducts(null,  { limit: 8 });
 
   res.render("home", { products });
 });

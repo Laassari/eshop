@@ -5,12 +5,26 @@
     <link rel="stylesheet" href="/stylesheets/components/product-card.css" />
     <title>eShop - Products</title>
     <%- include('../components/head_common.html') %>
+    <script type="module" src="/javascript/pages/products/index.js"></script>
   </head>
   <body>
     <%- include('../components/navbar.html') %>
 
     <main>
-      <h1>Products</h1>
+      <div class="heading">
+        <h1>Products</h1>
+
+        <select id="category">
+          <option value="">Select a category</option>
+          <% categories.forEach(category => { %>
+          <option
+            value="<%= category %>"
+            <%= currentCategory === category && 'selected' %>
+          ><%= category %></option>
+          <% }) %>
+        </select>
+      </div>
+
       <div class="products">
         <% locals.products.forEach(product => {%> <%-
         include('../components/product_card.html', {product}) %> <%}) %>

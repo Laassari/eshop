@@ -1,9 +1,19 @@
 import Product from "../models/Product.js";
 
 export const index = async (req, res) => {
-  const products = await Product.getProducts();
+  const filters = {};
 
-  res.render("products/index", { products });
+  if (isAllowedCategory(req.query.category)) {
+    filters.category = req.query.category;
+  }
+
+  const products = await Product.getProducts(filters);
+
+  res.render("products/index", {
+    products,
+    currentCategory: filters.category,
+    categories: Product.PRODUCT_CATEGORIES,
+  });
 };
 
 export const show = async (req, res) => {
@@ -44,3 +54,7 @@ export const create = async (req, res) => {
     return res.status(422).send(error);
   }
 };
+
+function isAllowedCategory(category) {
+  return Product.PRODUCT_CATEGORIES.includes(category);
+}

@@ -2,8 +2,20 @@ import BaseModel from "./BaseModel.js";
 import { query, SQL } from "../db/db.js";
 
 class ProductSingelton extends BaseModel {
-  async getProducts({ limit } = {}) {
-    const q = SQL`SELECT * FROM products ORDER BY id`;
+  PRODUCT_CATEGORIES = [
+    "women's clothing",
+    "electronics",
+    "men's clothing",
+    "jewelery",
+  ];
+
+  async getProducts(filters, { limit } = {}) {
+    const { category } = filters || {};
+    const q = SQL`SELECT * FROM products`;
+
+    if (category) q.append(SQL` WHERE category = ${category}`);
+
+    q.append(SQL` ORDER BY id`);
 
     if (limit) q.append(SQL` LIMIT ${limit}`);
     const { rows } = await query(q);
